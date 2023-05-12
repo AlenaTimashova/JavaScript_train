@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Строки
+/*
+        const word = "Hello";
+        alert(word.length);
+        alert(word.at(-2));
+        alert(word[0]);
+        for (let char of word) {
+            alert(char); // H,e,l,l,o (char — сначала "H", потом "e", потом "l" и т.д.)
+        }
+*/
+        let str = "Ослик Иа-Иа посмотрел на виадук";
+        let target = "Иа";
+
+        let pos = -1;
+        while ((pos = str.indexOf(target, pos + 1)) != -1) {
+        alert( pos );
+        }
+
+        function ucFirst(str) {
+            if (!str) return str; // пустая строка = 0 => !0 == true
+
+            return str[0].toUpperCase() + str.slice(1);
+}
+
+alert( ucFirst("вася") ); // Вася
+    </script>
+</body>
+</html>
+
