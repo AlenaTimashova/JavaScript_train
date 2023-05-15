@@ -150,6 +150,13 @@ xxxxx
 </details>
 
 <details>
+<summary>Lesson 5</summary>
+
+- Введение в DOM: поиск, изменение, создание и удаление объектов.
+- Обработчики событий
+
+</details>
+<details>
 <summary>LearnJS</summary>
 
 1. Напишите функцию isEmpty(obj), которая возвращает true, если у объекта нет свойств, иначе false.
