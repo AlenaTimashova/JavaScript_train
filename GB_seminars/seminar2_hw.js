@@ -98,6 +98,7 @@ class Phonebook {
         //     }
         // }
         this.contacts = this.contacts.filter((contact) => contact.name !== name);
+        console.log(`Deleted contact ${name}`);
 
     }
 
