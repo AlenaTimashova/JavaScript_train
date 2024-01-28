@@ -38,8 +38,4 @@ async function showImg() {
            `
   );
 }
-
-let interval = async () => {
-  setInterval(showImg, 3000);
-};
-interval();
+setInterval(showImg, 3000);
