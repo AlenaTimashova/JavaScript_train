@@ -38,4 +38,7 @@ async function showImg() {
            `
   );
 }
-setInterval(showImg, 3000);
+
+for (let index = 3000; index <= 30000; index += 3000) {
+  setTimeout(showImg, index);
+}
