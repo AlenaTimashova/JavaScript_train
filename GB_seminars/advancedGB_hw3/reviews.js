@@ -4,57 +4,93 @@
 // При клике на название продукта отображается список всех отзывов по этому продукту.
 // Возможность удаления отзыва (при нажатии на кнопку "Удалить" рядом с отзывом, данный отзыв удаляется из LocalStorage).
 
-const reviewList = document.querySelector(".review-list");
-console.log(reviewList);
-
-// Восстановление списка из локального хранилища
-
-if (localStorage) {
-  for (let index = 0; index < localStorage.length; index++) {
-    reviewList.insertAdjacentHTML(
-      "afterbegin",
-      `
-    <li class="product_name">
-    <h2 class="product_title">${localStorage.key(index)}</h2>
-    </li>
-    `
-    );
-    getReviews(localStorage.key(index));
+/**
+ * Функция отрисовывает список продуктов в браузере
+ * @param {*} arr Список продуктов в виде массива
+ */
+function renderProductList(arr) {
+  if (localStorage) {
+    arr.forEach((arrItem) => {
+      reviewList.insertAdjacentHTML(
+        "afterbegin",
+        `
+              <li class="product_name">
+              <h2 class="product_title">${arrItem}</h2>
+              </li>
+              `
+      );
+    });
   }
 }
 
 /**
+ * Функция возвращает список продуктов в виде массива
+ * @returns arr Список продуктов (ключей)
+ */
+function getProducts(collection) {
+  const productsArr = [];
+  for (let index = 0; index < collection.length; index++) {
+    productsArr.push(localStorage.key(index));
+  }
+
+  return productsArr;
+}
+
+/**
  * Функция для создания блока отзывов о продукте (product)
- * @param {String} product Название продукта (ключ LocalStorage)
+ * @param {String} product Название продукта
  * @returns html разметку - блок отзывов о продукте
  */
 
 function getReviews(product) {
-  const productReviews = JSON.parse(localStorage.getItem(product));
+  const productReviews = getProductReviews(product);
   let reviewBox = document.createElement("ul");
-  for (let index = 0; index < productReviews.length; index++) {
+  productReviews.forEach((reviewItem) => {
     reviewBox.insertAdjacentHTML(
       "afterbegin",
-      `
-    <li class="product-review">
-    ${productReviews[index]}
-    <button class="delete-btn">Удалить</button>
-    </li>
-    
-    `
+      `<li class="product-review"> ${reviewItem}
+      <button class="delete-btn">Удалить</button>
+      </li>`
     );
-  }
+  });
+
   reviewBox.style.display = "none";
 
   return reviewBox;
 }
 
-const productList = reviewList.children;
+/**
+ * функция возвращает список отзывов по указанному продукту из LocalStorage
+ * @param {String} product
+ * @returns arr
+ */
+function getProductReviews(product) {
+  return JSON.parse(localStorage.getItem(product));
+}
+
+/**
+ * Функция обновления локального хранилища
+ * @param {*} product
+ * @param {*} arr
+ */
+function updateLocalStorageProduct(product, arr) {
+  localStorage.setItem(product, JSON.stringify(arr));
+}
+
+const reviewList = document.querySelector(".review-list");
+
+// Восстановление списка из локального хранилища
+const products = getProducts(localStorage); //получаем список продуктов
+renderProductList(products); // рендер на странице продуктов
+
+const productList = reviewList.children; // html collection
 
 for (let i = 0; i < productList.length; i++) {
-  let reviewBlock = getReviews(productList[i].innerText);
+  let reviewBlock = getReviews(productList[i].innerText); //создаем отзывы по каждому продукту из списка
 
-  productList[i].insertAdjacentElement("beforeEnd", reviewBlock);
+  productList[i].insertAdjacentElement("beforeEnd", reviewBlock); //вставляем отзывы под продукт
+
+  //меняем по клику видимость:
 
   productList.item(i).addEventListener("click", (event) => {
     if (event.target.classList.contains("product_title")) {
@@ -67,10 +103,19 @@ for (let i = 0; i < productList.length; i++) {
   });
 }
 
+//удаляем по кнопке отзыв:
+
 reviewList.addEventListener("click", (event) => {
   if (event.target.classList.contains("delete-btn")) {
     const listItem = event.target.closest("li");
-    console.log(listItem);
+    const coll = listItem.parentNode.children;
+    const productName =
+      listItem.parentNode.parentNode.firstElementChild.innerText; // ключ - продукт
     listItem.parentNode.removeChild(listItem);
+    console.log(Array.from(coll));
+    for (let i = 0; i < coll.length; i++) {
+      console.log(productName, coll[i]);
+      //   addToStorage(productName, coll[i]);
+    }
   }
 });

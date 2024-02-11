@@ -26,10 +26,13 @@ sendBtn.addEventListener("click", (event) => {
 function addToStorage(product, review) {
   if (product !== "" && review !== "") {
     let reviews = JSON.parse(localStorage.getItem(product));
+    console.log(reviews);
     if (reviews === null) {
       reviews = [];
     }
     reviews.push(review);
+    console.log(review);
+    console.log(product, JSON.stringify(reviews));
     localStorage.setItem(product, JSON.stringify(reviews));
     infoBox.textContent = "Отзыв успешно добавлен";
   } else {
