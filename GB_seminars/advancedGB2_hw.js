@@ -73,7 +73,10 @@ const errorMsg = document.querySelector(".error-box");
 
 btnEl.addEventListener("click", () => {
   try {
-    if (userInput.value.length < 50 || userInput.value.length > 100) {
+    if (
+      userInput.value.trim().length < 15 ||
+      userInput.value.trim().length > 300
+    ) {
       throw new Error("Длина отзыва должна быть от 50 до 100 знаков");
     }
     const li = document.createElement("li");

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-.form-box {
+#review-form {
   margin: 15px;
   display: flex;
   flex-direction: column;
@@ -19,6 +19,15 @@ button {
 ul {
   margin: 20px;
   list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.product_name h2:hover {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .error-box {
