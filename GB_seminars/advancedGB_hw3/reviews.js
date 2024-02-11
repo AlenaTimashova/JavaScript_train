@@ -48,7 +48,7 @@ function getReviews(product) {
   productReviews.forEach((reviewItem) => {
     reviewBox.insertAdjacentHTML(
       "afterbegin",
-      `<li class="product-review"> ${reviewItem}
+      `<li class="product-review"> <p>${reviewItem}</p>
       <button class="delete-btn">Удалить</button>
       </li>`
     );
@@ -66,15 +66,6 @@ function getReviews(product) {
  */
 function getProductReviews(product) {
   return JSON.parse(localStorage.getItem(product));
-}
-
-/**
- * Функция обновления локального хранилища
- * @param {*} product
- * @param {*} arr
- */
-function updateLocalStorageProduct(product, arr) {
-  localStorage.setItem(product, JSON.stringify(arr));
 }
 
 const reviewList = document.querySelector(".review-list");
@@ -112,10 +103,13 @@ reviewList.addEventListener("click", (event) => {
     const productName =
       listItem.parentNode.parentNode.firstElementChild.innerText; // ключ - продукт
     listItem.parentNode.removeChild(listItem);
-    console.log(Array.from(coll));
+
+    const newProductReviewList = [];
+
     for (let i = 0; i < coll.length; i++) {
-      console.log(productName, coll[i]);
-      //   addToStorage(productName, coll[i]);
+      newProductReviewList.push(coll[i].firstElementChild.innerText);
     }
+
+    localStorage.setItem(productName, JSON.stringify(newProductReviewList));
   }
 });
