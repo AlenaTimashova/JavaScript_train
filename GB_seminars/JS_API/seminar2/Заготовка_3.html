@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Симуляция добавления товара в корзину</title>
+    <style>
+      /* Стили для кнопки */
+      .buy-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="buy-button">Купить</button>
+
+    <script>
+      const buyButton = document.querySelector(".buy-button");
+      //Продолжите решение
+
+      buyButton.addEventListener("click", (event) => {
+        if (event.isTrusted) {
+          buyButton.textContent = "Товар добавлен в корзину";
+          setTimeout(() => {
+            buyButton.textContent = "Купить";
+          }, 2000);
+        }
+      });
+    </script>
+  </body>
+</html>
