@@ -1,4 +1,27 @@
-const fitActivities = [
+// const fitActivities = [
+//   {
+//     fitName: "Аэробика",
+//     fitTime: "вт, чт 17:00",
+//     maxPeople: 20,
+//     placesLeft: 20,
+//   },
+//   {
+//     fitName: "Пилатес",
+//     fitTime: "пн, ср 17:00",
+//     maxPeople: 15,
+//     placesLeft: 15,
+//   },
+//   {
+//     fitName: "Кроссфит",
+//     fitTime: "вт, пт 18:00",
+//     maxPeople: 10,
+//     placesLeft: 10,
+//   },
+// ];
+
+const fitActivitiesList = document.querySelector(".list-group");
+
+const fitActivities = JSON.parse(localStorage.getItem("fitActivities")) || [
   {
     fitName: "Аэробика",
     fitTime: "вт, чт 17:00",
@@ -18,8 +41,6 @@ const fitActivities = [
     placesLeft: 10,
   },
 ];
-
-const fitActivitiesList = document.querySelector(".list-group");
 
 //Рендер списка на странице
 
@@ -57,12 +78,15 @@ fitActivitiesList.addEventListener("click", function (event) {
         }
       }
       if (event.target.classList.contains("cancel")) {
-        fitItem.placesLeft += 1;
-        if (event.target.previousElementSibling.disabled) {
-          event.target.previousElementSibling.disabled = false;
+        if (fitItem.placesLeft < fitItem.maxPeople) {
+          fitItem.placesLeft += 1;
+          if (event.target.previousElementSibling.disabled) {
+            event.target.previousElementSibling.disabled = false;
+          }
         }
       }
       placesLeft.textContent = `Осталось мест: ${fitItem.placesLeft}`;
     }
+    localStorage.setItem("fitActivities", JSON.stringify(fitActivities));
   });
 });
