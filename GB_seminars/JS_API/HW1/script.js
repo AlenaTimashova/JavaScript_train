@@ -57,9 +57,11 @@ fitActivitiesList.addEventListener("click", function (event) {
         }
       }
       if (event.target.classList.contains("cancel")) {
-        fitItem.placesLeft += 1;
-        if (event.target.previousElementSibling.disabled) {
-          event.target.previousElementSibling.disabled = false;
+        if (fitItem.placesLeft < fitItem.maxPeople) {
+          fitItem.placesLeft += 1;
+          if (event.target.previousElementSibling.disabled) {
+            event.target.previousElementSibling.disabled = false;
+          }
         }
       }
       placesLeft.textContent = `Осталось мест: ${fitItem.placesLeft}`;
