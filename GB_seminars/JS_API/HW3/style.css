@@ -1,0 +1,15 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+figure {
+  padding: 50px;
+  width: 600px;
+}
+
+.picture {
+  width: 100%;
+  object-fit: cover;
+}
