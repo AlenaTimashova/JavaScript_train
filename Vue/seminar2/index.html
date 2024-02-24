@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seminar 2</title>
+  </head>
+  <body>
+    <!-- 1. Вы разрабатываете страницу для отображения
+информации о товаре. У вас есть объект product, который
+содержит информацию о товаре, включая название, цену
+и URL изображения товара. Вам необходимо отобразить
+эту информацию на странице с использованием v-bind.
+2. Добавьте кнопку, которая будет изменять цену товара. При
+нажатии на кнопку должна генерироваться скидка на
+товар от 1 до 20% и обновиться цена товара в
+соответствии с значением скидки -->
+    <div id="app">
+      <div class="product">
+        <h2>{{product.title}}</h2>
+        <p>{{product.price}}</p>
+        <img width="300" :src="product.image" alt="#" />
+        <button @click="addDiscount" :disabled="isDisabled">Скидка</button>
+      </div>
+
+      <!-- Вы разрабатываете простое приложение для
+отображения списка пользователей. У вас есть массив
+объектов users, где каждый объект представляет одного
+пользователя с его именем и возрастом. Вам необходимо
+отобразить каждого пользователя из массива в виде
+списка на странице. -->
+      <hr />
+
+      <ul>
+        <li v-for="user in users" :key="user.id">
+          {{user.name}} - {{user.age}}
+        </li>
+      </ul>
+      <hr />
+      <!-- Вы разрабатываете приложение для создания списка
+покупок. У вас есть массив объектов items, где каждый
+объект представляет товар с его названием и
+количеством. Вам необходимо отобразить список товаров,
+предоставить возможность изменять количество каждого
+товара и отмечать товары, которые уже куплены. -->
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <input v-model.lazy.number="item.amount" type="number" step="1" />
+          <label> <input type="checkbox" /> {{ item.name }} </label>
+        </li>
+      </ul>
+
+      <hr />
+      <!-- Вы разрабатываете приложение для управления списком контактов.
+У вас есть форма с полями "Имя", "Фамилия" и "Email", где
+пользователь может вводить информацию о новом контакте. После
+добавления контакта он должен отображаться в списке контактов.
+Требуется связать форму с данными и отображать список контактов -->
+      <!-- на странице. -->
+
+      <form action="#" @submit.prevent="addContact">
+        <input v-model.lazy="firstName" type="text" placeholder="Имя" />
+        <input v-model.lazy="lastName" type="text" placeholder="Фамилия" />
+        <input v-model.lazy="email" type="email" placeholder="email" />
+        <button>Отправить</button>
+      </form>
+      <ul>
+        <li
+          v-for="contact in contacts"
+          :key="contact.id"
+          @click="removeContact($event)"
+        >
+          {{contact.firstName}} - {{contact.lastName}} - {{contact.email}}
+        </li>
+      </ul>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = {
+        data() {
+          return {
+            contacts: [],
+            firstName: "",
+            lastName: "",
+            email: "",
+            items: [
+              {
+                id: 1,
+                name: "Молоко",
+                amount: 5,
+              },
+              {
+                id: 2,
+                name: "Хлеб",
+                amount: 2,
+              },
+              {
+                id: 3,
+                name: "Яблоки",
+                amount: 10,
+              },
+              {
+                id: 4,
+                name: "Мясо",
+                amount: 6,
+              },
+            ],
+            users: [
+              {
+                id: 1,
+                name: "Alex",
+                age: 18,
+              },
+              {
+                id: 2,
+                name: "Alex",
+                age: 15,
+              },
+              {
+                id: 3,
+                name: "Masha",
+                age: 36,
+              },
+            ],
+            isDisabled: false,
+            product: {
+              title: "Товар",
+              price: 1000,
+              image:
+                "https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_655dd52aeece0b744ad0048e_655dfa4311aa97744330de27/scale_1200",
+            },
+          };
+        },
+        methods: {
+          addDiscount() {
+            const discount = Math.floor(Math.random() * 20 + 1);
+            this.product.price =
+              this.product.price - (this.product.price * discount) / 100;
+            this.isDisabled = true;
+          },
+          addContact() {
+            const contact = {
+              id: this.contacts.length + 1,
+              firstName: this.firstName,
+              lastName: this.lastName,
+              email: this.email,
+            };
+            this.contacts.push(contact);
+            this.firstName = "";
+            this.lastName = "";
+            this.email = "";
+          },
+          delContact(id) {
+            this.contacts = this.contacts.filter(
+              (contact) => contact.id !== id
+            );
+          },
+          removeContact(event) {
+            event.target.remove();
+          },
+        },
+      };
+
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>

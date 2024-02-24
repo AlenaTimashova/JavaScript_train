@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>Товаров в корзине {{ number }}</p>
+      <button @click="buy">{{ btnText }}</button>
+
+      <button @click="allow">“Мне исполнилось 14 лет</button>
+      <button @click="prohibit">“Мне еще нет 14 лет</button>
+      <p>{{message}}</p>
+
+      <button @click="show">Показать еще</button>
+      <p v-if="seen">Какой-то текст</p>
+
+      <button @click="generateNum">Генерировать случайное число</button>
+      <p>{{num}}</p>
+      <p>{{ randNum }}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          number: 0,
+          btnText: "купить",
+          message: "",
+          seen: false,
+          randNum: "",
+          num: "",
+        },
+        methods: {
+          buy() {
+            if (this.number == 0) this.number++;
+            this.btnText = "товар в корзине";
+          },
+          allow() {
+            this.message = "Можете заказать товар";
+          },
+          prohibit() {
+            this.message = "Доступ закрыт";
+          },
+          show() {
+            this.seen = !this.seen;
+          },
+          generateNum() {
+            this.num = Math.random() * 10;
+            if (this.num < 5) this.randNum = "Число меньше 5";
+            else if (this.num > 5 && this.num < 10)
+              this.randNum = "Число от 5 до 9";
+            else this.randNum = "Число равно 10";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

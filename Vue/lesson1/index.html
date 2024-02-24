@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson1 VUE</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>Вывод данных</h2>
+
+      <h1>{{ message }}</h1>
+
+      <h2>Bind attributes</h2>
+
+      <span v-bind:title="message1">
+        Наведи на меня курсор на пару секунд, чтобы увидеть динамически
+        связанное значение title!
+      </span>
+
+      <h2>Methods</h2>
+
+      <p>{{number}}</p>
+      <button @click="counter()">click</button>
+
+      <h2>V-for list</h2>
+      <ul>
+        <li v-for="name in names">{{ name }}</li>
+      </ul>
+
+      <h2>V-model and V-if</h2>
+
+      <input type="text" v-model="name" />
+      <p v-if="name.length != 0">Hi, my name is {{ name }}</p>
+
+      <h2>revert text</h2>
+
+      <p>{{ words }}</p>
+      <button @click="revert()">Перевернуть</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Привет, Vue!",
+          message1: "Вы загрузили эту страницу: " + new Date().toLocaleString(),
+          number: 0,
+          names: ["Frodo", "Sam", "Meriadoc", "Peregrin"],
+          name: "",
+          words: "Hello, dude!",
+        },
+        methods: {
+          counter() {
+            this.number++;
+          },
+          revert() {
+            this.words = this.words.split("").reverse().join("");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

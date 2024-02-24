@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homework 1</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Создать кнопку "Перевернуть". При клике на кнопку текст кнопки должен перевернуться и отобразиться в обратном порядке. -->
+      <button @click="revert">{{ btnMessage }}</button>
+
+      <!-- Есть список элементов. Пользователь может добавлять новые элементы списка с текстом “Новый элемент списка” нажав на кнопку "Добавить". -->
+      <!-- Дополнительное задание: При клике на элемент списка он должен быть удален. (по желанию) -->
+      <ul>
+        <li
+          v-for="(item, index) in list"
+          :key="index"
+          @click="removeTask($event)"
+        >
+          {{item}}
+        </li>
+      </ul>
+      <button @click="addTask">Добавить</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = {
+        el: "#app",
+        data() {
+          return {
+            btnMessage: "Перевернуть",
+            list: ["Элемент списка 1", "Элемент списка 2", "Элемент списка 3"],
+          };
+        },
+        methods: {
+          revert() {
+            this.btnMessage = this.btnMessage.split("").reverse().join("");
+          },
+          addTask() {
+            this.list.push("Новый элемент списка");
+          },
+          removeTask(event) {
+            event.target.remove();
+          },
+        },
+      };
+
+      Vue.createApp(app).mount("#app");
+    </script>
+  </body>
+</html>
