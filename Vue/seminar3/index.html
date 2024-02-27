@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seminar 3</title>
+  </head>
+  <body>
+    <div id="app">
+      <count></count>
+      <count></count>
+
+      <tasks></tasks>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="counter.js"></script>
+    <script src="tasks.js"></script>
+    <script>
+      const app = Vue.createApp({
+        components: {
+          count,
+          tasks,
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
