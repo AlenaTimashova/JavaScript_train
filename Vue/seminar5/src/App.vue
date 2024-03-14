@@ -1,23 +1,17 @@
 <template>
-  <AuthenticationComponent :isAuth="false" />
-  <UserListComponent />
-  <MortgageCalculatorComponent />
-  <ProductDetails />
+  <BookListComponent />
+  <MovieListComponent />
 </template>
 
 <script>
-import AuthenticationComponent from "./components/AuthenticationComponent.vue";
-import UserListComponent from "./components/UserListComponent.vue";
-import MortgageCalculatorComponent from "./components/MortgageCalculatorComponent.vue";
-import ProductDetails from "./components/ProductDetails.vue";
+import BookListComponent from "./components/BookListComponent.vue";
+import MovieListComponent from "./components/MovieListComponent.vue";
 
 export default {
   name: "App",
   components: {
-    AuthenticationComponent,
-    UserListComponent,
-    MortgageCalculatorComponent,
-    ProductDetails,
+    BookListComponent,
+    MovieListComponent,
   },
 };
 </script>
